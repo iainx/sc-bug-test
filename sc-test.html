@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Soundcloud Test</title>
+<style>
+article {
+	padding: 20px;
+}
+</style>
+</head>
+
+<body>
+<article id="player1">
+<header id="title1">Double Dagger - Heretic's Hymn</header>
+<div class="player">
+</div>
+</article>
+
+<article id="player2">
+<header id="title2">Jonathan Rado - Faces</header>
+<div class="player">
+</div>
+</article>
+
+<article id="player3">
+<header id="title3">CFCF - Camera</header>
+<div class="player">
+</div>
+</article>
+
+<script src='jquery-1.10.1.min.js'></script>
+<script>
+$(function() {
+	tracks = ["http://soundcloud.com/thrilljockey/double-dagger-heretics-hymn", "http://soundcloud.com/woodsist/jonathan-rado-faces", "http://soundcloud.com/cfcf/camera"];
+
+	function updateTrack(trackUrl, playerNumber) {
+		console.log('updating: ' + trackUrl);
+		$.getJSON('http://soundcloud.com/oembed?callback=?',
+			  {format: 'js', url: trackUrl, iframe:'true'},
+		  	  function(data) {
+				var articleDiv = $('#player' + playerNumber);
+				var playerDiv = articleDiv.find('.player');
+
+				var position = playerDiv.position();
+				playerDiv.html(data['html']);
+
+				var titleDiv = articleDiv.find("header"); 
+				titleDiv.text(data['title']);
+		  	});
+	}
+
+	for (var i = 1; i < 4; i++) {
+		updateTrack(tracks[i - 1], i);
+	}
+});
+</script>
+</body>
