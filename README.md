@@ -17,5 +17,5 @@ Chrome:
 
 1. Load sc-test.html in a tab.
 2. Close tab
-3. Press <CTRL>+<Shift>+T (reopen closed tab)
+3. Press CTRL+Shift+T (reopen closed tab)
 4. Page will reload in a page, but they load in the incorrect order.
